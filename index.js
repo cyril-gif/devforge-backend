@@ -9,7 +9,10 @@ import dotenv from 'dotenv';
 import authRoutes from './routes/auth.js';
 import courseRoutes from './routes/courses.js';
 import progressRoutes from './routes/progress.js';
+import userRouters from './routes/users.js';
 import lessonRoutes from './routes/lessons.js';
+import challengeRoutes from './routes/challenges.js';
+import leaderboardRoutes from './routes/leaderboard.js';
 import { validateEnv } from './middleware/validateEnv.js';
 
 // Load environment variables FIRST
@@ -75,6 +78,10 @@ app.use('/api/courses', courseRoutes);
 app.use('/api/progress', progressRoutes);
 // Add after other routes
 app.use('/api/lessons', lessonRoutes);
+app.use('/api/leaderboard', leaderboardRoutes);
+app.use('/api/challenges', challengeRoutes);
+app.use('/api/users', userRouters );
+
 
 // 404 handler for undefined routes
 app.use( (req, res) => {
