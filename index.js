@@ -11,7 +11,7 @@ import courseRoutes from './routes/courses.js';
 import progressRoutes from './routes/progress.js';
 import userRouters from './routes/users.js';
 import lessonRoutes from './routes/lessons.js';
-import challengeRoutes from './routes/challenges.js';
+import challengeRoutes from './routes/challenge.js';
 import leaderboardRoutes from './routes/leaderboard.js';
 import { validateEnv } from './middleware/validateEnv.js';
 
