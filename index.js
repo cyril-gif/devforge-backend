@@ -11,6 +11,7 @@ import courseRoutes from './routes/courses.js';
 import progressRoutes from './routes/progress.js';
 import userRouters from './routes/users.js';
 import lessonRoutes from './routes/lessons.js';
+import profileRoutes from './routes/profile.js'
 import challengeRoutes from './routes/challenge.js';
 import leaderboardRoutes from './routes/leaderboard.js';
 import { validateEnv } from './middleware/validateEnv.js';
@@ -81,7 +82,7 @@ app.use('/api/lessons', lessonRoutes);
 app.use('/api/leaderboard', leaderboardRoutes);
 app.use('/api/challenges', challengeRoutes);
 app.use('/api/users', userRouters );
-
+app.use('/api/profile', profileRoutes);
 
 // 404 handler for undefined routes
 app.use( (req, res) => {

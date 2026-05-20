@@ -8,6 +8,11 @@ const userSchema = new mongoose.Schema({
   streak: { type: Number, default: 0 },
   lastActive: { type: Date, default: Date.now },
   badges: [{ type: String }],
+  bio: { type: String, default: '' },
+location: { type: String, default: '' },
+website: { type: String, default: '' },
+avatar: { type: String, default: '' },
+longestStreak: { type: Number, default: 0 },
   enrolledCourses: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Course' }],
   completedLessons: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Lesson' }]
 }, { timestamps: true });

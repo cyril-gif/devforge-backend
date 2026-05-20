@@ -63,6 +63,7 @@ router.get('/me', authMiddleware, async (req, res) => {
       xp: user.xp,
       streak: user.streak,
       badges: user.badges,
+      longestStreak: {type: Number, default: 0 },
       completedLessons: completedLessonIds,
       enrolledCourses: user.enrolledCourses
     });
