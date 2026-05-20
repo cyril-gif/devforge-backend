@@ -29,9 +29,7 @@ app.use(helmet());
 const corsOptions = {
   origin: [
     'http://localhost:3000',
-    'http://172.20.10.10:3000',  // Your IP
-    'http://172.20.10.10:5000',
-    /^http:\/\/172\.20\.10\.\d+:\d+$/,  // Allow any port on your IP
+    'https://devforge-frontend-three.vercel.app',
   ],
   credentials: true,
   optionsSuccessStatus: 200
