@@ -172,6 +172,8 @@ router.get('/weekly-leaderboard', async (req, res) => {
   }
 });
 
+
+
 // Get challenge by ID (for answering)
 router.get('/:id', authMiddleware, async (req, res) => {
   try {
@@ -187,6 +189,14 @@ router.get('/:id', authMiddleware, async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
+});
+
+router.get('/my-created', authMiddleware, async (req, res) => {
+  const challenges = await Challenge.find({
+    challengerId: req.user._id,
+    status: { $ne: 'completed' }
+  }).populate('opponentId', 'username');
+  res.json(challenges);
 });
 
 export default router;
