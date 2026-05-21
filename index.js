@@ -34,6 +34,7 @@ const corsOptions = {
   origin: [
     'http://localhost:3000',
     'https://devforge-frontend-three.vercel.app',
+    'http://localhost:5000',
   ],
   credentials: true,
   optionsSuccessStatus: 200
