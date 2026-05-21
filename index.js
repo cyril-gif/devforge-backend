@@ -33,7 +33,7 @@ app.use(helmet());
 const corsOptions = {
   origin: [
     'http://localhost:3000',
-    'https://devforge-frontend-three.vercel.app',
+    'https://devforge-tech.vercel.app',
     'http://localhost:5000',
   ],
   credentials: true,
