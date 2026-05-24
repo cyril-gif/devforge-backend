@@ -1,5 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 import cors from 'cors';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
@@ -18,6 +19,7 @@ import profileRoutes from './routes/profile.js'
 import challengeRoutes from './routes/challenge.js';
 import leaderboardRoutes from './routes/leaderboard.js';
 import { validateEnv } from './middleware/validateEnv.js';
+dotenv.config();
 
 // Load environment variables FIRST
 
