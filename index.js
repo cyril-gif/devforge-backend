@@ -17,7 +17,7 @@ import progressRoutes from './routes/progress.js';
 import userRoutes from './routes/users.js';
 import lessonRoutes from './routes/lessons.js';
 import profileRoutes from './routes/profile.js';
-import challengeRoutes from './routes/challenges.js';   // ✅ must be plural (challenges.js)
+import challengesRoutes from './routes/challenges.js';   // ✅ must be plural (challenges.js)
 import leaderboardRoutes from './routes/leaderboard.js';
 import oauthRoutes from './routes/oauth.js';
 
@@ -78,7 +78,7 @@ app.use('/api/courses', courseRoutes);
 app.use('/api/progress', progressRoutes);
 app.use('/api/lessons', lessonRoutes);
 app.use('/api/leaderboard', leaderboardRoutes);
-app.use('/api/challenges', challengeRoutes);
+app.use('/api/challenges', challengesRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/profile', profileRoutes);
 app.use('/api/oauth', oauthRoutes);
