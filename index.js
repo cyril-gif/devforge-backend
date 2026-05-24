@@ -5,9 +5,11 @@ import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import mongoSanitize from 'express-mongo-sanitize';
 import morgan from 'morgan';
-import dotenv from 'dotenv';
+import passport from 'passport';
+import session from 'express-session';
 import authRoutes from './routes/auth.js';
 import courseRoutes from './routes/courses.js';
+import oauthRoutes from './routes/oauth.js';
 import progressRoutes from './routes/progress.js';
 import userRouters from './routes/users.js';
 import lessonRoutes from './routes/lessons.js';
@@ -17,7 +19,9 @@ import leaderboardRoutes from './routes/leaderboard.js';
 import { validateEnv } from './middleware/validateEnv.js';
 
 // Load environment variables FIRST
-dotenv.config();
+
+console.log('GOOGLE_CLIENT_ID:', process.env.GOOGLE_CLIENT_ID ? 'set' : 'missing');
+console.log('RESEND_API_KEY loaded:', !!process.env.RESEND_API_KEY);
 
 // Validate environment variables
 validateEnv();
@@ -63,6 +67,15 @@ if (process.env.NODE_ENV === 'development') {
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
+
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
 // ============ ROUTES ============
 
 // Health check endpoint (for monitoring)
@@ -84,7 +97,7 @@ app.use('/api/leaderboard', leaderboardRoutes);
 app.use('/api/challenges', challengeRoutes);
 app.use('/api/users', userRouters );
 app.use('/api/profile', profileRoutes);
-
+app.use('/api/oauth', oauthRoutes);
 // 404 handler for undefined routes
 app.use( (req, res) => {
   res.status(404).json({ message: `Route ${req.method} ${req.url} not found` });
