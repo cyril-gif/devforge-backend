@@ -7,6 +7,7 @@ import mongoSanitize from 'express-mongo-sanitize';
 import morgan from 'morgan';
 import passport from 'passport';
 import session from 'express-session';
+import rateLimit from 'express-rate-limit';
 import authRoutes from './routes/auth.js';
 import courseRoutes from './routes/courses.js';
 import oauthRoutes from './routes/oauth.js';
@@ -33,6 +34,9 @@ const app = express();
 // Helmet - Security headers
 app.use(helmet());
 
+//trust first proxy (Render frontend on Vercel and backend on Render)
+app.set('trust proxy', 1);
+
 // CORS - Allow frontend to connect
 const corsOptions = {
   origin: [
@@ -52,6 +56,7 @@ app.use(mongoSanitize());
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100, // limit each IP to 100 requests per window
+  trustProxy: true, // trust first proxy (Render frontend on Vercel and backend on Render)
   message: 'Too many requests from this IP, please try again after 15 minutes',
   standardHeaders: true,
   legacyHeaders: false,
