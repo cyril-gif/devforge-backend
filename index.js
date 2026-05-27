@@ -10,7 +10,8 @@ import morgan from 'morgan';
 import passport from 'passport';
 import session from 'express-session';
 import rateLimit from 'express-rate-limit';
-import  adminRoutes  from './routes/admin.js';
+//import  adminRoutes  from './routes/admin.js';
+//import { isAdmin } from './middleware/admin.js';
 import authRoutes from './routes/auth.js';
 import courseRoutes from './routes/courses.js';
 import progressRoutes from './routes/progress.js';
@@ -83,7 +84,7 @@ app.use('/api/challenges', challengesRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/profile', profileRoutes);
 app.use('/api/oauth', oauthRoutes);
-app.use('/api/admin', adminRoutes);
+ //app.use('/api/admin', adminRoutes);
 app.use('/api/ai', aiRoutes);
 
 // 404
