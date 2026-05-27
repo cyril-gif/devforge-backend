@@ -4,6 +4,7 @@ import authMiddleware from '../middleware/auth.js';
 
 const router = express.Router();
 
+
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
 router.post('/', authMiddleware, async (req, res) => {
