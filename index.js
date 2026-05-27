@@ -10,11 +10,12 @@ import morgan from 'morgan';
 import passport from 'passport';
 import session from 'express-session';
 import rateLimit from 'express-rate-limit';
-
+import  adminRoutes  from './routes/admin.js';
 import authRoutes from './routes/auth.js';
 import courseRoutes from './routes/courses.js';
 import progressRoutes from './routes/progress.js';
 import userRoutes from './routes/users.js';
+import aiRoutes from './routes/ai.js';
 import lessonRoutes from './routes/lessons.js';
 import profileRoutes from './routes/profile.js';
 import challengesRoutes from './routes/challenges.js';   // ✅ must be plural (challenges.js)
@@ -82,6 +83,8 @@ app.use('/api/challenges', challengesRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/profile', profileRoutes);
 app.use('/api/oauth', oauthRoutes);
+app.use('/api/admin', adminRoutes);
+app.use('/api/ai', aiRoutes);
 
 // 404
 app.use((req, res) => {
