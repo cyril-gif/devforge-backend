@@ -4,11 +4,10 @@ import authMiddleware from '../middleware/auth.js';
 
 const router = express.Router();
 
-// Initialize Gemini
+// Initialize Gemini once (outside the route handler)
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
 
-// POST /api/ai
 router.post('/', authMiddleware, async (req, res) => {
   try {
     const { message, context } = req.body;
@@ -16,18 +15,13 @@ router.post('/', authMiddleware, async (req, res) => {
       return res.status(400).json({ error: 'Message is required' });
     }
 
-    // System prompt
-    const systemPrompt = `You are DevForge AI, a friendly coding tutor helping students learn web development.
-Keep answers clear, concise (under 150 words), and beginner-friendly.
-Use examples when helpful. If they ask for code, provide formatted code snippets.`;
+    const systemPrompt = `You are DevForge AI, a friendly coding tutor helping students learn web development. Keep answers clear, concise (under 150 words), and beginner-friendly. Use examples when helpful. If they ask for code, provide formatted code snippets.`;
 
-    const userContext = context || 'No specific context';
-    const fullPrompt = `${systemPrompt}\n\nUser context: ${userContext}\n\nUser question: ${message}`;
+    const fullPrompt = `${systemPrompt}\n\nUser context: ${context || 'No specific context'}\n\nUser question: ${message}`;
 
     // Call Gemini API
     const result = await model.generateContent(fullPrompt);
-    const response = result.response;
-    const reply = response.text();
+    const reply = result.response.text();
 
     res.json({ reply });
   } catch (error) {
@@ -37,4 +31,5 @@ Use examples when helpful. If they ask for code, provide formatted code snippets
 });
 
 export default router;
+
 
